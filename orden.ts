@@ -1,4 +1,4 @@
-class Orden {
+export class Orden {
     constructor(
         public tipo: 'compra' | 'venta',
         public compania: string,

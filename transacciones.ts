@@ -1,4 +1,4 @@
-class Transaccion {
+export class Transaccion {
     constructor(
         public compania: string,
         public cantidad: number,
