@@ -36,11 +36,45 @@ export class SimularAcciones {
       const ordenVentaTop = this.ordenesVenta.peek();
 
       if (ordenCompraTop.precio >= ordenVentaTop.precio) {
-        break;
+        this.ejecutarTransaccion(ordenCompraTop, ordenVentaTop);
       } else {
         break; // No hay mas emparejamientos posibles
       }
     }
+  }
+
+  private ejecutarTransaccion(ordenCompra: Orden, ordenVenta: Orden): void {
+    const precio = ordenVenta.precio; // La transaciomn ocurre al precio de venta
+    const cantidad = Math.min(ordenCompra.cantidad, ordenVenta.cantidad);
+
+    // Crear y registrar la transaccion
+    const transaccion = new Transaccion(
+      ordenCompra.compania,
+      cantidad,
+      precio,
+      ordenCompra.usuario,
+      ordenVenta.usuario
+    );
+    this.transacciones.push(transaccion);
+
+    // Actualizar cantidades de las ordenes
+    ordenCompra.cantidad -= cantidad;
+    ordenVenta.cantidad -= cantidad;
+
+    // Eliminar ordenes completamente llenas, reinsertar las parcialmente llenas
+    this.ordenesCompra.getMax();
+    this.ordenesVenta.getMin();
+
+    if (ordenCompra.cantidad > 0) {
+      this.ordenesCompra.insert(ordenCompra);
+    }
+    if (ordenVenta.cantidad > 0) {
+      this.ordenesVenta.insert(ordenVenta);
+    }
+  }
+
+  obtenerHistorialTransacciones(): Transaccion[] {
+    return this.transacciones;
   }
 
   
