@@ -29,6 +29,21 @@ function imprimirOrden(mercado: SimularAcciones) {
     //console.log("");
 }
 
+function imprimirAllOrden(mercado: SimularAcciones) {
+    const todasLasOrdenes = mercado.allOrden();
+    
+    console.log("Ordenes de Compra Disponibles:");
+    todasLasOrdenes.compra.forEach((orden, index) => {
+        console.log(`${index + 1}. Compania: ${orden.compania}, Cantidad: ${orden.cantidad}, Precio: ${orden.precio}, Usuario: ${orden.usuario}`);
+    });
+
+    console.log("\nOrdenes de Venta Disponibles:");
+    todasLasOrdenes.venta.forEach((orden, index) => {
+        console.log(`${index + 1}. Compania: ${orden.compania}, Cantidad: ${orden.cantidad}, Precio: ${orden.precio}, Usuario: ${orden.usuario}`);
+    });
+    console.log('');
+}
+
 
 //  tipo, compania, cantidad, precio, usuario
 const compra1 = new Orden('compra', 'accion 1', 10, 150, 'dennys');
@@ -36,32 +51,48 @@ const compra2 = new Orden('compra', 'accion 1', 5, 155, 'rolando');
 const venta1 = new Orden('venta', 'accion 1', 7, 148, 'yosimar');
 const venta2 = new Orden('venta', 'accion 1', 3, 152, 'lim');
 
-console.log('Registrar ordenes')
+console.log('Registrar ordenes');
+console.log('** Insertar orden de compra');
 mercado.insertarOrdenCompra(compra1);
-console.log('compra')
 // Imprimir las ordenes disponibles
 imprimirOrden(mercado);
+// console.log('************Ordenes**********:');
+// imprimirAllOrden(mercado);
+// console.log('Fin')
 
+console.log('')
+console.log('** Insertar orden de compra');
 mercado.insertarOrdenCompra(compra2);
-console.log('compra')
 // Imprimir las ordenes disponibles
 imprimirOrden(mercado);
+console.log('Fin')
 
+console.log('')
+console.log('** Insertar orden de venta');
 mercado.insertarOrdenVenta(venta1);
-console.log('venta')
 // Imprimir las ordenes disponibles
 imprimirOrden(mercado);
+console.log('Fin')
 
+console.log('')
+console.log('** Insertar orden de venta');
 mercado.insertarOrdenVenta(venta2);
-console.log('venta')
-// Imprimir las órdenes disponibles
+// Imprimir las ordenes disponibles
 imprimirOrden(mercado);
+console.log('Fin')
+
+// Imprimir las ordenes disponibles
+console.log('')
+console.log('Ordenes');
+imprimirOrden(mercado);
+console.log('Fin')
 
 //imprimir
+console.log('')
+console.log('Transacciones');
 imprimirTransacciones(mercado);
+console.log('Fin')
 
-// Imprimir las ordenes disponibles
-imprimirOrden(mercado);
 
 //  tipo, compania, cantidad, precio, usuario
 const compra3 = new Orden('compra', 'apple', 8, 2500, 'ling');
@@ -71,6 +102,13 @@ mercado.insertarOrdenCompra(compra3);
 mercado.insertarOrdenVenta(venta3);
 
 //imprimir
+console.log('')
+console.log('** Transacciones');
 imprimirTransacciones(mercado);
+console.log('Fin')
+
 // Imprimir las ordenes disponibles actualizadas
+console.log('')
+console.log('Ordenes');
 imprimirOrden(mercado);
+console.log('Fin')
